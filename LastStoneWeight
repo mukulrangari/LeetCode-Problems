@@ -1,0 +1,35 @@
+note: heap STL is used 
+    .make_heap()
+    .pop_heap() -> pop_back()
+    .push_back() -> push_heap()
+    .Que-> https://leetcode.com/problems/last-stone-weight/
+class Solution {
+public:
+    int lastStoneWeight(vector<int>& stones) {
+        int ans=0;
+        int n=0;
+        make_heap(stones.begin(),stones.end());
+        int a,b;
+        if(stones.size()==1){
+            return stones[0];
+        }
+        while(stones.size()!=2){
+            a=stones.front();
+            pop_heap(stones.begin(),stones.end());
+            stones.pop_back();
+            b=stones.front();
+            pop_heap(stones.begin(),stones.end());
+            stones.pop_back();
+            stones.push_back(abs(a-b));
+            push_heap(stones.begin(),stones.end());
+        }
+        a=stones.front();
+        pop_heap(stones.begin(),stones.end());
+        stones.pop_back();
+        b=stones.front();
+        pop_heap(stones.begin(),stones.end());
+        stones.pop_back();
+        ans=abs(a-b);
+        return ans;
+    }
+};
